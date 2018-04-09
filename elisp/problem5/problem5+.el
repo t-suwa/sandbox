@@ -18,14 +18,13 @@ FACTOR must be a reverse list of (n1 op1 n2 op2 ... nN) or (n1)."
     (dolist (term (nreverse factor) result)
       (cond ((null result) (setq result term))
             ((null op) (setq op term))
-            (t
-             (and (eq op '/)
-                  (or (zerop term)
-                      (/= 0 (% result term)))
-                  (error "Detected a remainder"))
-             (setq result
-                   (funcall op result term))
-             (setq op nil))))))
+            (t (and (eq op '/)
+                    (or (zerop term)
+                        (/= 0 (% result term)))
+                    (error "Detected a remainder"))
+               (setq result
+                     (funcall op result term))
+               (setq op nil))))))
 
 (defun calc (formula)
   "Calculate FORMULA.
